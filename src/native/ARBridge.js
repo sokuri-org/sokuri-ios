@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 const { ARBridge } = NativeModules;
 
 export default ARBridge;
