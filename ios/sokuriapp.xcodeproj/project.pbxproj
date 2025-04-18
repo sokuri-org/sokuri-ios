@@ -9,28 +9,25 @@
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1456AD5058EE858B88062C00 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
-		2C81B968B44F3778677927D1 /* Pods_sokuriapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE18ADD6A4D327811C0BE7C /* Pods_sokuriapp.framework */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A943ED852DB0D10B00C8785E /* PlayfairDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A943ED842DB0D10B00C8785E /* PlayfairDisplay-Medium.ttf */; };
 		A993232B2DAD60E700E779C8 /* ARBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993232A2DAD60E700E779C8 /* ARBridge.swift */; };
-		A9B9DB3B2DB0CBDC00B0EFEF /* Playfair Display.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9B9DB3A2DB0CBDC00B0EFEF /* Playfair Display.ttf */; };
+		B2E79DB8EEF19086D7CDFF04 /* Pods_sokuriapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B854AA0B3BA69110FD73BDA /* Pods_sokuriapp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0DE18ADD6A4D327811C0BE7C /* Pods_sokuriapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sokuriapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* sokuriapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sokuriapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = sokuriapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = sokuriapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = sokuriapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		1A70B2B646848BF4D35F2B34 /* Pods-sokuriapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sokuriapp.release.xcconfig"; path = "Target Support Files/Pods-sokuriapp/Pods-sokuriapp.release.xcconfig"; sourceTree = "<group>"; };
+		73A3DEF5D3354AF9E6DAE1A8 /* Pods-sokuriapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sokuriapp.release.xcconfig"; path = "Target Support Files/Pods-sokuriapp/Pods-sokuriapp.release.xcconfig"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = sokuriapp/AppDelegate.swift; sourceTree = "<group>"; };
+		7B854AA0B3BA69110FD73BDA /* Pods_sokuriapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sokuriapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = sokuriapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A943ED842DB0D10B00C8785E /* PlayfairDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		A993232A2DAD60E700E779C8 /* ARBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBridge.swift; sourceTree = "<group>"; };
 		A993232C2DAD68FF00E779C8 /* sokuriapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sokuriapp-Bridging-Header.h"; sourceTree = "<group>"; };
-		A9B9DB3A2DB0CBDC00B0EFEF /* Playfair Display.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Playfair Display.ttf"; sourceTree = "<group>"; };
-		ED6066AFC666CB4833891D6C /* Pods-sokuriapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sokuriapp.debug.xcconfig"; path = "Target Support Files/Pods-sokuriapp/Pods-sokuriapp.debug.xcconfig"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F7CBA2D36BBC6D082A46467D /* Pods-sokuriapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sokuriapp.debug.xcconfig"; path = "Target Support Files/Pods-sokuriapp/Pods-sokuriapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,26 +35,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C81B968B44F3778677927D1 /* Pods_sokuriapp.framework in Frameworks */,
+				B2E79DB8EEF19086D7CDFF04 /* Pods_sokuriapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1289C38F7CABDEE595E5D653 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0DE18ADD6A4D327811C0BE7C /* Pods_sokuriapp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		13B07FAE1A68108700A75B9A /* sokuriapp */ = {
 			isa = PBXGroup;
 			children = (
-				A943ED842DB0D10B00C8785E /* PlayfairDisplay-Medium.ttf */,
-				A9B9DB3A2DB0CBDC00B0EFEF /* Playfair Display.ttf */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -69,13 +56,30 @@
 			name = sokuriapp;
 			sourceTree = "<group>";
 		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				7B854AA0B3BA69110FD73BDA /* Pods_sokuriapp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
 				13B07FAE1A68108700A75B9A /* sokuriapp */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
-				1289C38F7CABDEE595E5D653 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -93,8 +97,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ED6066AFC666CB4833891D6C /* Pods-sokuriapp.debug.xcconfig */,
-				1A70B2B646848BF4D35F2B34 /* Pods-sokuriapp.release.xcconfig */,
+				F7CBA2D36BBC6D082A46467D /* Pods-sokuriapp.debug.xcconfig */,
+				73A3DEF5D3354AF9E6DAE1A8 /* Pods-sokuriapp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -106,13 +110,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sokuriapp" */;
 			buildPhases = (
-				AE977599A5755F7BFD5EBF13 /* [CP] Check Pods Manifest.lock */,
+				6C4D732ECA953A69A9A0B5DA /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				555444CF0BDE2D4FFEC47828 /* [CP] Embed Pods Frameworks */,
-				2A254D55003940DC52958856 /* [CP] Copy Pods Resources */,
+				28D5D45EFF7EB476C12F6F68 /* [CP] Embed Pods Frameworks */,
+				73F2864EE5CC8ACB0DC37D53 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -159,8 +163,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9B9DB3B2DB0CBDC00B0EFEF /* Playfair Display.ttf in Resources */,
-				A943ED852DB0D10B00C8785E /* PlayfairDisplay-Medium.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1456AD5058EE858B88062C00 /* PrivacyInfo.xcprivacy in Resources */,
@@ -186,24 +188,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		2A254D55003940DC52958856 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		555444CF0BDE2D4FFEC47828 /* [CP] Embed Pods Frameworks */ = {
+		28D5D45EFF7EB476C12F6F68 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,7 +205,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AE977599A5755F7BFD5EBF13 /* [CP] Check Pods Manifest.lock */ = {
+		6C4D732ECA953A69A9A0B5DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -239,7 +224,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run "pod install" or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode "outputs" to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73F2864EE5CC8ACB0DC37D53 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sokuriapp/Pods-sokuriapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -259,7 +261,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED6066AFC666CB4833891D6C /* Pods-sokuriapp.debug.xcconfig */;
+			baseConfigurationReference = F7CBA2D36BBC6D082A46467D /* Pods-sokuriapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -362,7 +364,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A70B2B646848BF4D35F2B34 /* Pods-sokuriapp.release.xcconfig */;
+			baseConfigurationReference = 73A3DEF5D3354AF9E6DAE1A8 /* Pods-sokuriapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
