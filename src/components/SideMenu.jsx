@@ -6,6 +6,7 @@ import {
   Pressable,
   StyleSheet,
   Dimensions,
+  Linking,
 } from "react-native";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -16,8 +17,24 @@ export default function SideMenu({ visible, onClose, onSelect }) {
   const slideAnim = useRef(new Animated.Value(-MENU_WIDTH)).current;
   const [rendered, setRendered] = useState(visible);
 
-  const mainLinks = ["소쿠리", "담아보기", "사이즈 재보기", "보관함"];
-  const secondaryLinks = ["Market", "English"];
+  const mainLinks = [
+    {
+      title: "소쿠리",
+      link: "main",
+    },
+    {
+      title: "담아보기",
+      link: "simulation",
+    },
+    {
+      title: "사이즈 입력하기",
+      link: "sizeSummary",
+    },
+    {
+      title: "보관함",
+      link: "main",
+    },
+  ];
 
   useEffect(() => {
     if (visible) setRendered(true);
@@ -29,14 +46,19 @@ export default function SideMenu({ visible, onClose, onSelect }) {
       if (!visible) setRendered(false);
     });
   }, [visible, slideAnim]);
-
   const handlePress = (label) => {
     Animated.timing(slideAnim, {
       toValue: -MENU_WIDTH,
       duration: ANIMATION_DURATION,
       useNativeDriver: true,
     }).start(() => {
-      onSelect?.(label);
+      if (label === "Contact") {
+        Linking.openURL("mailto:sokuri@gmail.com").catch((err) =>
+          console.error("메일 앱 열기 실패:", err),
+        );
+      } else {
+        !label ? onSelect?.("main") : onSelect?.(label);
+      }
       onClose?.();
     });
   };
@@ -46,30 +68,19 @@ export default function SideMenu({ visible, onClose, onSelect }) {
   return (
     <View style={StyleSheet.absoluteFill}>
       <Pressable style={styles.overlay} onPress={handlePress} />
-
       <Animated.View
         style={[styles.menu, { transform: [{ translateX: slideAnim }] }]}>
         <View style={styles.section}>
           {mainLinks.map((label, idx) => (
             <Pressable
               key={idx}
-              onPress={() => handlePress(label)}
+              onPress={() => handlePress(label.link)}
               style={styles.mainItem}>
-              <Text style={styles.mainText}>{label}</Text>
+              <Text style={styles.mainText}>{label.title}</Text>
             </Pressable>
           ))}
         </View>
         <View style={styles.divider} />
-        <View style={styles.section}>
-          {secondaryLinks.map((label, idx) => (
-            <Pressable
-              key={idx}
-              onPress={() => handlePress(label)}
-              style={styles.secondaryItem}>
-              <Text style={styles.secondaryText}>{label}</Text>
-            </Pressable>
-          ))}
-        </View>
         <View style={styles.footer}>
           <Pressable onPress={() => handlePress("Contact")}>
             <Text style={styles.footerText}>Contact</Text>
@@ -94,6 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: 100,
     paddingHorizontal: 20,
+    flex: 1,
   },
   section: {
     marginBottom: 20,
