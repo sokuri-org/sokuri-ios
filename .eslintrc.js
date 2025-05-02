@@ -1,8 +1,10 @@
 module.exports = {
   root: true,
+  parser: "babel-eslint",
   extends: ["@react-native", "plugin:prettier/recommended"],
   parserOptions: {
     sourceType: "module",
+    ecmaVersion: 2020
   },
   plugins: ["prettier", "import", "react"],
   rules: {
