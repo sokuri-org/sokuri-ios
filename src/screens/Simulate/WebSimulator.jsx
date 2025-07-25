@@ -1,7 +1,15 @@
 import { WEB_VIEW_API } from "@env";
-import React, { useEffect } from "react";
+import { isEqual } from "lodash";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  forwardRef,
+} from "react";
 import { StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
+import useWebViewBridge from "@/hooks/useWebViewBridge";
 import { useSokuriStore } from "@/store/useSokuriStore";
 
 const INJECTED_JAVASCRIPT = `
@@ -21,40 +29,55 @@ const INJECTED_JAVASCRIPT = `
   true;
 `;
 
-const WebSimulator = React.forwardRef(({ onLoadReady }, ref) => {
+const WebSimulator = forwardRef(({ onLoadReady }, ref) => {
   const bag = useSokuriStore((s) => s.bag);
   const items = useSokuriStore((s) => s.items);
   const updateItemPosition = useSokuriStore((s) => s.updateItemPosition);
+  const [webViewReady, setWebViewReady] = useState(false);
+  const prevPayloadRef = useRef(null);
 
-  const handleWebViewMessage = (event) => {
-    try {
-      const data = JSON.parse(event.nativeEvent.data);
-      switch (data.type) {
-        case "WEBVIEW_READY":
-          onLoadReady?.();
-          break;
-        case "ITEM_MOVED":
-          updateItemPosition(data.id, data.position);
-          break;
-        case "CONSOLE_LOG":
-          console.log("[WebView]:", ...data.payload);
-          break;
+  const postMessageToWebView = useWebViewBridge(ref, webViewReady);
+
+  const handleWebViewMessage = useCallback(
+    (event) => {
+      try {
+        const data = JSON.parse(event.nativeEvent.data);
+        switch (data.type) {
+          case "WEBVIEW_READY":
+            setWebViewReady(true);
+            onLoadReady?.();
+            break;
+          case "ITEM_MOVED":
+            updateItemPosition(data.id, data.position);
+            break;
+          case "CONSOLE_LOG":
+            console.log("[WebView]:", ...data.payload);
+            break;
+        }
+      } catch (err) {
+        console.error(
+          "Failed to parse WebView message:",
+          err,
+          event.nativeEvent.data,
+        );
       }
-    } catch (err) {
-      console.error("Failed to parse WebView message:", err);
-    }
-  };
+    },
+    [onLoadReady, updateItemPosition],
+  );
 
   useEffect(() => {
-    const postMessageToWebView = (action, data) => {
-      if (!ref?.current?.postMessage) return;
-      ref.current.postMessage(JSON.stringify({ action, data }));
-    };
+    if (!webViewReady) return;
 
-    if (bag?.width && items?.length > 0) {
-      postMessageToWebView("RENDER_PACKING", { bag, items });
+    const currentPayload = { bag, items };
+    if (
+      bag?.width &&
+      items?.length > 0 &&
+      !isEqual(currentPayload, prevPayloadRef.current)
+    ) {
+      postMessageToWebView("RENDER_PACKING", currentPayload);
+      prevPayloadRef.current = currentPayload;
     }
-  }, [bag, items, ref]);
+  }, [bag, items, postMessageToWebView, webViewReady]);
 
   return (
     <WebView
