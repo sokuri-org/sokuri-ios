@@ -4,6 +4,23 @@ import { StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 import { useSokuriStore } from "@/store/useSokuriStore";
 
+const INJECTED_JAVASCRIPT = `
+  (function() {
+    const originalLog = console.log;
+    console.log = function(...args) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({
+        type: "CONSOLE_LOG",
+        payload: args
+      }));
+      originalLog.apply(console, args);
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify({
+      type: "WEBVIEW_READY"
+    }));
+  })();
+  true;
+`;
+
 const WebSimulator = React.forwardRef(({ onLoadReady }, ref) => {
   const bag = useSokuriStore((s) => s.bag);
   const items = useSokuriStore((s) => s.items);
@@ -45,23 +62,7 @@ const WebSimulator = React.forwardRef(({ onLoadReady }, ref) => {
       source={{ uri: WEB_VIEW_API }}
       javaScriptEnabled
       onMessage={handleWebViewMessage}
-      injectedJavaScript={`
-        (function() {
-          const originalLog = console.log;
-          console.log = function(...args) {
-            window.ReactNativeWebView.postMessage(JSON.stringify({
-              type: "CONSOLE_LOG",
-              payload: args
-            }));
-            originalLog.apply(console, args);
-          };
-
-          window.ReactNativeWebView.postMessage(JSON.stringify({
-            type: "WEBVIEW_READY"
-          }));
-        })();
-        true;
-      `}
+      injectedJavaScript={INJECTED_JAVASCRIPT}
       style={styles.webViewArea}
     />
   );
