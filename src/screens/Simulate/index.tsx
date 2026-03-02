@@ -1,19 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
-import AddItemModal from "@/components/AddItemModal";
-import EditBagModal from "@/components/EditBagModal";
-import EditItemModal from "@/components/EditItemModal";
-import BagSizeCard from "@/screens/BagSize/BagSizeCard";
-import ItemList from "@/screens/ItemList";
-import PresetItemList from "@/screens/ItemList/PresetItemList";
-import SimulateTabBar from "@/screens/Simulate/SimulateTabBar";
-import WebSimulator from "@/screens/Simulate/WebSimulator";
-import { useSokuriStore } from "@/store/useSokuriStore";
+import React, { useState, useRef, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { WebView } from 'react-native-webview';
+import AddItemModal from '@/components/AddItemModal';
+import EditBagModal from '@/components/EditBagModal';
+import EditItemModal from '@/components/EditItemModal';
+import BagSizeCard from '@/screens/BagSize/BagSizeCard';
+import ItemList from '@/screens/ItemList';
+import PresetItemList from '@/screens/ItemList/PresetItemList';
+import SimulateTabBar from '@/screens/Simulate/SimulateTabBar';
+import WebSimulator from '@/screens/Simulate/WebSimulator';
+import { useSokuriStore } from '@/store/useSokuriStore';
+
+type TabType = 'items' | 'size' | 'preset';
 
 export default function Simulate() {
-  const webViewRef = useRef(null);
+  const webViewRef = useRef<WebView | null>(null);
   const [webViewReady, setWebViewReady] = useState(false);
-  const [activeTab, setActiveTab] = useState("items");
+  const [activeTab, setActiveTab] = useState<TabType>('items');
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editBagModalVisible, setEditBagModalVisible] = useState(false);
@@ -25,14 +28,14 @@ export default function Simulate() {
   useEffect(() => {
     if (
       shouldAddBagToWebView &&
-      activeTab === "items" &&
+      activeTab === 'items' &&
       webViewReady &&
       webViewRef.current &&
       bag?.width
     ) {
       webViewRef.current.postMessage(
         JSON.stringify({
-          action: "RENDER_PACKING",
+          action: 'RENDER_PACKING',
           data: { bag, items },
         }),
       );
@@ -50,7 +53,7 @@ export default function Simulate() {
       </View>
 
       <View style={styles.bottomSection}>
-        {activeTab === "items" && (
+        {activeTab === 'items' && (
           <ItemList
             webViewRef={webViewRef}
             openModal={() => setModalVisible(true)}
@@ -58,11 +61,11 @@ export default function Simulate() {
           />
         )}
 
-        {activeTab === "size" && (
+        {activeTab === 'size' && (
           <BagSizeCard onEdit={() => setEditBagModalVisible(true)} />
         )}
 
-        {activeTab === "preset" && <PresetItemList webViewRef={webViewRef} />}
+        {activeTab === 'preset' && <PresetItemList webViewRef={webViewRef} />}
       </View>
 
       <AddItemModal

@@ -1,14 +1,18 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useSokuriStore } from "@/store/useSokuriStore";
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useSokuriStore } from '@/store/useSokuriStore';
 
-export default function BagSizeCard({ onEdit }) {
+interface BagSizeCardProps {
+  onEdit: () => void;
+}
+
+export default function BagSizeCard({ onEdit }: BagSizeCardProps) {
   const bag = useSokuriStore((s) => s.bag);
 
   return (
     <View style={styles.sizeCard}>
       <View style={styles.sizeRow}>
-        {["가로", "세로", "폭"].map((label, i) => (
+        {['가로', '세로', '폭'].map((label, i) => (
           <View key={label} style={styles.sizeBlock}>
             <Text style={styles.sizeLabel}>{label}</Text>
             <Text style={styles.sizeValue}>
@@ -27,46 +31,46 @@ export default function BagSizeCard({ onEdit }) {
 
 const styles = StyleSheet.create({
   sizeCard: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: '#f9f9f9',
     borderRadius: 12,
     padding: 16,
     marginTop: 6,
-    alignItems: "center",
+    alignItems: 'center',
   },
   sizeRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
     marginBottom: 12,
   },
   sizeBlock: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 16,
     flex: 1,
   },
   sizeLabel: {
     fontSize: 12,
-    color: "#999",
+    color: '#999',
     marginBottom: 4,
   },
   sizeValue: {
     fontSize: 20,
-    fontWeight: "300",
-    color: "#222",
+    fontWeight: '300',
+    color: '#222',
   },
   unit: {
     fontSize: 12,
-    color: "#777",
+    color: '#777',
   },
   editSizeButton: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
   },
   editSizeText: {
     fontSize: 14,
-    color: "#333",
+    color: '#333',
   },
 });

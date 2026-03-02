@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, RefObject } from 'react';
 import {
   View,
   Text,
@@ -6,13 +6,25 @@ import {
   TouchableWithoutFeedback,
   Alert,
   StyleSheet,
-} from "react-native";
-import { SwipeListView } from "react-native-swipe-list-view";
-import BoxIcon from "@/assets/images/box.svg";
-import TrashIcon from "@/assets/images/trash.svg";
-import { useSokuriStore } from "@/store/useSokuriStore";
+} from 'react-native';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { WebView } from 'react-native-webview';
+import BoxIcon from '@/assets/images/box.svg';
+import TrashIcon from '@/assets/images/trash.svg';
+import { useSokuriStore } from '@/store/useSokuriStore';
+import { Item } from '@/types';
 
-export default function ItemList({ webViewRef, openModal, openEditModal }) {
+interface ItemListProps {
+  webViewRef: RefObject<WebView | null>;
+  openModal: () => void;
+  openEditModal: () => void;
+}
+
+export default function ItemList({
+  webViewRef,
+  openModal,
+  openEditModal,
+}: ItemListProps) {
   const items = useSokuriStore((s) => s.items);
   const setSelectedItem = useSokuriStore((s) => s.setSelectedItem);
   const setEditItemDims = useSokuriStore((s) => s.setEditItemDims);
@@ -23,16 +35,16 @@ export default function ItemList({ webViewRef, openModal, openEditModal }) {
         <SwipeListView
           data={items}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
+          renderItem={({ item }: { item: Item }) => (
             <TouchableWithoutFeedback
               key={item.id}
               delayLongPress={300}
               onLongPress={() => {
                 setSelectedItem(item);
                 setEditItemDims({
-                  가로: item.width,
-                  세로: item.height,
-                  폭: item.depth,
+                  w: String(item.width),
+                  h: String(item.height),
+                  d: String(item.depth),
                 });
                 openEditModal();
               }}>
@@ -49,19 +61,19 @@ export default function ItemList({ webViewRef, openModal, openEditModal }) {
               </View>
             </TouchableWithoutFeedback>
           )}
-          renderHiddenItem={({ item }) => (
+          renderHiddenItem={({ item }: { item: Item }) => (
             <View style={styles.rowBack}>
               <TouchableOpacity
                 style={styles.deleteBtn}
                 onPress={() =>
                   Alert.alert(
-                    "삭제 확인",
+                    '삭제 확인',
                     `"${item.itemTitle}" 아이템을 삭제할까요?`,
                     [
-                      { text: "취소", style: "cancel" },
+                      { text: '취소', style: 'cancel' },
                       {
-                        text: "삭제",
-                        style: "destructive",
+                        text: '삭제',
+                        style: 'destructive',
                         onPress: () =>
                           useSokuriStore
                             .getState()
@@ -70,7 +82,7 @@ export default function ItemList({ webViewRef, openModal, openEditModal }) {
                     ],
                   )
                 }>
-                <TrashIcon width={16} height={16} style={styles.deleteText} />
+                <TrashIcon width={16} height={16} />
               </TouchableOpacity>
             </View>
           )}
@@ -92,49 +104,49 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   itemCard: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "#f9f9f9",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#f9f9f9',
     padding: 16,
     marginTop: 6,
     borderRadius: 8,
   },
   itemName: {
     fontSize: 14,
-    color: "#222",
+    color: '#222',
   },
   itemInfo: {
     fontSize: 12,
-    color: "#777",
+    color: '#777',
     marginTop: 2,
   },
   rowBack: {
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     paddingRight: 15,
   },
   deleteBtn: {
-    backgroundColor: "#ff4d4d",
+    backgroundColor: '#ff4d4d',
     marginTop: 16,
     paddingVertical: 16,
     paddingHorizontal: 16,
     borderRadius: 6,
   },
   deleteText: {
-    color: "#fff",
-    fontWeight: "600",
+    color: '#fff',
+    fontWeight: '600',
   },
   addItemButton: {
     padding: 12,
     borderRadius: 8,
-    backgroundColor: "#f2f2f2",
-    alignItems: "center",
+    backgroundColor: '#f2f2f2',
+    alignItems: 'center',
   },
   addItemText: {
-    color: "#ffcd4a",
+    color: '#ffcd4a',
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });

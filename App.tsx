@@ -18,27 +18,22 @@ import SizeSummaryCard from "@/screens/BagSize/SizeSummaryCard";
 import Home from "@/screens/Home";
 import Simulate from "@/screens/Simulate";
 import { useSokuriStore } from "@/store/useSokuriStore";
+import { Screen } from "@/types";
 
 const screenHeight = Dimensions.get("window").height;
 
 export default function App() {
-  const [url, setUrl] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const setCurrentScreen = useSokuriStore((s) => s.setCurrentScreen);
   const currentScreen = useSokuriStore((s) => s.currentScreen);
 
-  const handleMenuSelect = (label) => {
+  const handleMenuSelect = (label: Screen) => {
     setMenuVisible(false);
     setCurrentScreen(label);
   };
 
   const handlePageChange = () => {
     setCurrentScreen("simulation");
-  };
-
-  const handleUrlSubmit = (submittedUrl) => {
-    setUrl(submittedUrl);
-    setCurrentScreen("sizeSummary");
   };
 
   const handleSizeEdit = () => {
@@ -49,10 +44,8 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
         <Header />
-        {currentScreen === "main" && <Home onSubmit={handleUrlSubmit} />}
-        {currentScreen === "sizeSummary" && (
-          <SizeSummaryCard onEdit={handleSizeEdit} />
-        )}
+        {currentScreen === "main" && <Home />}
+        {currentScreen === "sizeSummary" && <SizeSummaryCard />}
         {currentScreen === "simulation" && <Simulate />}
       </View>
 
@@ -61,9 +54,15 @@ export default function App() {
           <MenuIcon width={32} height={32} />
         </TouchableOpacity>
 
-        <BagIcon width={32} height={32} onPress={handleUrlSubmit} />
-        <HomeIcon width={32} height={32} onPress={handleSizeEdit} />
-        <BoxIcon width={32} height={32} onPress={handlePageChange} />
+        <TouchableOpacity onPress={() => setCurrentScreen("sizeSummary")}>
+          <BagIcon width={32} height={32} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSizeEdit}>
+          <HomeIcon width={32} height={32} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handlePageChange}>
+          <BoxIcon width={32} height={32} />
+        </TouchableOpacity>
         <InboxIcon width={32} height={32} />
       </View>
 

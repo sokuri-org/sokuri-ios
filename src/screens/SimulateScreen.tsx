@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { View, Button, StyleSheet } from "react-native";
-import { WebView } from "react-native-webview";
+import React, { useRef, useState } from 'react';
+import { View, Button, StyleSheet } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 export default function SimulationScreen() {
-  const webViewRef = useRef(null);
+  const webViewRef = useRef<WebView>(null);
   const [webViewLoaded, setWebViewLoaded] = useState(false);
 
   const itemSize = {
@@ -14,12 +14,12 @@ export default function SimulationScreen() {
 
   const sendSimulationData = () => {
     if (!webViewLoaded) {
-      console.warn("WebView가 조회되지 않았습니다");
+      console.warn('WebView가 조회되지 않았습니다');
       return;
     }
 
     const message = JSON.stringify({
-      action: "START_SIM",
+      action: 'START_SIM',
       data: { itemSize },
     });
     webViewRef.current?.postMessage(message);
@@ -29,9 +29,9 @@ export default function SimulationScreen() {
     <View style={styles.container}>
       <WebView
         ref={webViewRef}
-        originWhitelist={["*"]}
+        originWhitelist={['*']}
         source={{
-          uri: "https://sokuri-simulator-g0dtrlkft-sokuris-projects-487697b5.vercel.app",
+          uri: 'https://sokuri-simulator-g0dtrlkft-sokuris-projects-487697b5.vercel.app',
         }}
         javaScriptEnabled={true}
         onLoadEnd={() => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,33 +10,54 @@ import {
   KeyboardAvoidingView,
   FlatList,
   Platform,
-} from "react-native";
-import Toast from "react-native-toast-message";
-import { crawlReviewData } from "@/api/crawlReview";
-import { useSokuriStore } from "@/store/useSokuriStore";
+} from 'react-native';
+import Toast from 'react-native-toast-message';
+import { crawlReviewData } from '@/api/crawlReview';
+import { useSokuriStore } from '@/store/useSokuriStore';
+import { Screen } from '@/types';
+
+interface CardData {
+  title: string;
+  eng: string;
+  isRecommend?: boolean;
+  onPress?: () => void;
+}
+
+interface CardProps {
+  title: string;
+  eng?: string;
+  isRecommend?: boolean;
+  handlePage?: () => void;
+}
+
+interface PracticeItemProps {
+  title: string;
+  subTitle?: string;
+}
 
 export default function Home() {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   const setBag = useSokuriStore((s) => s.setBag);
   const setShouldAddBagToWebView = useSokuriStore(
     (s) => s.setShouldAddBagToWebView,
   );
   const setCurrentScreen = useSokuriStore((s) => s.setCurrentScreen);
   const [activeIndex, setActiveIndex] = useState(0);
-  const cards = [
+
+  const cards: CardData[] = [
     {
-      title: "가방 사이즈입력",
-      eng: "가방 사이즈를 입력해보세요",
-      onPress: () => setCurrentScreen("sizeSummary"),
+      title: '가방 사이즈입력',
+      eng: '가방 사이즈를 입력해보세요',
+      onPress: () => setCurrentScreen('sizeSummary' as Screen),
     },
     {
-      title: "시뮬레이션",
-      eng: "쉽게 물건을 넣어보세요",
-      onPress: () => setCurrentScreen("simulation"),
+      title: '시뮬레이션',
+      eng: '쉽게 물건을 넣어보세요',
+      onPress: () => setCurrentScreen('simulation' as Screen),
     },
     {
-      title: "소쿠리 가이드",
-      eng: "사용방법을 익혀보세요",
+      title: '소쿠리 가이드',
+      eng: '사용방법을 익혀보세요',
       isRecommend: true,
     },
   ];
@@ -45,19 +66,19 @@ export default function Home() {
     if (!url.trim()) return;
 
     Toast.show({
-      type: "info",
-      text1: "⌛ 크롤링 중...",
-      text2: "잠시만 기다려 주세요...",
+      type: 'info',
+      text1: '⌛ 크롤링 중...',
+      text2: '잠시만 기다려 주세요...',
     });
 
     try {
-      const res = await crawlReviewData(url);
+      const res = await crawlReviewData(url) as any;
 
       if (!res || !res.bag) {
         Toast.show({
-          type: "error",
-          text1: "크롤링 실패",
-          text2: "상품 정보를 불러올 수 없습니다.",
+          type: 'error',
+          text1: '크롤링 실패',
+          text2: '상품 정보를 불러올 수 없습니다.',
         });
         return;
       }
@@ -68,16 +89,16 @@ export default function Home() {
       setShouldAddBagToWebView(true);
 
       Toast.show({
-        type: "success",
-        text1: "🖼️ 후기 이미지 분석 완료",
-        text2: "가방사이즈를 확인해주세요",
+        type: 'success',
+        text1: '🖼️ 후기 이미지 분석 완료',
+        text2: '가방사이즈를 확인해주세요',
       });
-      setCurrentScreen("sizeSummary");
+      setCurrentScreen('sizeSummary');
     } catch (err) {
       Toast.show({
-        type: "error",
-        text1: "크롤링 실패",
-        text2: err?.response?.data?.detail || "상품 정보를 불러올 수 없습니다.",
+        type: 'error',
+        text1: '크롤링 실패',
+        text2: (err as any)?.response?.data?.detail || '상품 정보를 불러올 수 없습니다.',
       });
     }
   };
@@ -86,7 +107,7 @@ export default function Home() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView
         style={styles.container}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}>
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <TextInput
           style={styles.searchBar}
           placeholder="확인하고 싶은 상품의 URL을 입력하세요"
@@ -146,7 +167,7 @@ export default function Home() {
   );
 }
 
-function Card({ title, eng, isRecommend, handlePage }) {
+function Card({ title, eng, isRecommend, handlePage }: CardProps) {
   return (
     <TouchableOpacity onPress={handlePage}>
       <View style={styles.card}>
@@ -162,7 +183,7 @@ function Card({ title, eng, isRecommend, handlePage }) {
   );
 }
 
-function PracticeItem({ title, subTitle }) {
+function PracticeItem({ title, subTitle }: PracticeItemProps) {
   return (
     <View style={styles.practiceItem}>
       <View>
@@ -176,13 +197,13 @@ function PracticeItem({ title, subTitle }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     paddingHorizontal: 20,
   },
   searchBar: {
     marginTop: 16,
     padding: 12,
-    backgroundColor: "#f2f2f2",
+    backgroundColor: '#f2f2f2',
     borderRadius: 10,
     fontSize: 16,
   },
@@ -191,24 +212,24 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
+    backgroundColor: '#f8f8f8',
     borderRadius: 12,
     padding: 16,
     marginRight: 12,
     width: 200,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   cardTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 16,
   },
   newBadge: {
-    backgroundColor: "#e57373",
-    color: "#fff",
+    backgroundColor: '#e57373',
+    color: '#fff',
     fontSize: 12,
     paddingHorizontal: 6,
     paddingVertical: 2,
@@ -216,12 +237,12 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
   cardFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 8,
   },
   cardDuration: {
-    color: "#555",
+    color: '#555',
   },
   cardPlay: {
     fontSize: 18,
@@ -230,77 +251,77 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   seeAll: {
-    color: "#777",
+    color: '#777',
   },
   practiceItem: {
-    backgroundColor: "#eee",
+    backgroundColor: '#eee',
     padding: 12,
     borderRadius: 10,
     marginBottom: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   practiceTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 16,
   },
   practiceInfo: {
-    color: "#666",
+    color: '#666',
     marginTop: 4,
   },
   practicePlay: {
     fontSize: 18,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     marginTop: 30,
     paddingVertical: 16,
     borderTopWidth: 1,
-    borderTopColor: "#ddd",
+    borderTopColor: '#ddd',
   },
   button: {
-    backgroundColor: "#ffcd4a",
+    backgroundColor: '#ffcd4a',
     marginTop: 10,
     marginBottom: 10,
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "300",
+    color: '#fff',
+    fontWeight: '300',
     fontSize: 16,
   },
   icon: {
     marginLeft: 8,
   },
   indicatorContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 8,
   },
   indicatorDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#ccc",
+    backgroundColor: '#ccc',
     marginHorizontal: 4,
   },
   indicatorDotActive: {
-    backgroundColor: "#555",
+    backgroundColor: '#555',
   },
 });

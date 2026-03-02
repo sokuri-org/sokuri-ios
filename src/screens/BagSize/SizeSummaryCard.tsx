@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,18 +8,24 @@ import {
   Modal,
   TextInput,
   Alert,
-} from "react-native";
-import { useSokuriStore } from "@/store/useSokuriStore";
+} from 'react-native';
+import { useSokuriStore } from '@/store/useSokuriStore';
+
+interface BagInput {
+  width: string;
+  height: string;
+  depth: string;
+}
 
 export default function SizeSummaryCard() {
   const bag = useSokuriStore((s) => s.bag);
   const setBag = useSokuriStore((s) => s.setBagSize);
   const setCurrentScreen = useSokuriStore((s) => s.setCurrentScreen);
   const [modalVisible, setModalVisible] = useState(false);
-  const [bagInput, setBagInput] = useState({
-    width: bag?.width?.toString() || "",
-    height: bag?.height?.toString() || "",
-    depth: bag?.depth?.toString() || "",
+  const [bagInput, setBagInput] = useState<BagInput>({
+    width: bag?.width?.toString() || '',
+    height: bag?.height?.toString() || '',
+    depth: bag?.depth?.toString() || '',
   });
   const setShouldAddBagToWebView = useSokuriStore(
     (s) => s.setShouldAddBagToWebView,
@@ -27,7 +33,7 @@ export default function SizeSummaryCard() {
 
   const handleStartSimulation = () => {
     setShouldAddBagToWebView(true);
-    setCurrentScreen("simulation");
+    setCurrentScreen('simulation');
   };
 
   const handleModalSave = () => {
@@ -45,7 +51,7 @@ export default function SizeSummaryCard() {
       newBag.height <= 0 ||
       newBag.depth <= 0
     ) {
-      Alert("모든 값을 숫자로 입력해주세요.");
+      Alert.alert('입력 오류', '모든 값을 숫자로 입력해주세요.');
       return;
     }
 
@@ -56,9 +62,9 @@ export default function SizeSummaryCard() {
   useEffect(() => {
     if (modalVisible) {
       setBagInput({
-        width: bag?.width?.toString() || "",
-        height: bag?.height?.toString() || "",
-        depth: bag?.depth?.toString() || "",
+        width: bag?.width?.toString() || '',
+        height: bag?.height?.toString() || '',
+        depth: bag?.depth?.toString() || '',
       });
     }
   }, [bag?.width, bag?.height, bag?.depth, modalVisible]);
@@ -73,7 +79,7 @@ export default function SizeSummaryCard() {
         <View style={styles.cardContainer}>
           <View style={styles.card}>
             <View style={styles.grid}>
-              {["너비", "높이", "폭"].map((label, index) => (
+              {['너비', '높이', '폭'].map((label, index) => (
                 <View key={label} style={styles.gridItem}>
                   <Text style={styles.gridLabel}>{label}</Text>
                   <Text style={styles.gridValue}>
@@ -158,158 +164,158 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 24,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   header: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 30,
   },
   title: {
     fontSize: 24,
-    fontWeight: "300",
-    color: "#111",
+    fontWeight: '300',
+    color: '#111',
   },
   cardContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   card: {
-    width: "100%",
+    width: '100%',
     maxWidth: 360,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: '#f9f9f9',
     borderRadius: 12,
     padding: 24,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowRadius: 6,
     elevation: 2,
   },
   grid: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   gridItem: {
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1,
   },
   gridLabel: {
     fontSize: 12,
-    color: "#888",
+    color: '#888',
     marginBottom: 4,
   },
   gridValue: {
     fontSize: 24,
-    fontWeight: "300",
-    color: "#222",
+    fontWeight: '300',
+    color: '#222',
   },
   unit: {
     fontSize: 14,
     marginLeft: 2,
-    color: "#666",
+    color: '#666',
   },
   editWrapper: {
     marginTop: 5,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   editButton: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   editText: {
     fontSize: 12,
-    color: "#f9f9f9",
+    color: '#f9f9f9',
     marginLeft: 4,
   },
   actions: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginTop: 16,
     gap: 12,
   },
   primaryButton: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffcd4a",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffcd4a',
     borderRadius: 8,
     paddingVertical: 14,
   },
   primaryButtonText: {
-    color: "black",
+    color: 'black',
     fontSize: 16,
-    fontWeight: "300",
+    fontWeight: '300',
   },
   secondaryButton: {
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 8,
     paddingVertical: 14,
-    alignItems: "center",
+    alignItems: 'center',
   },
   secondaryButtonText: {
-    color: "#444",
+    color: '#444',
     fontSize: 16,
-    fontWeight: "300",
+    fontWeight: '300',
   },
   subtitle: {
     fontSize: 12,
     paddingTop: 50,
-    textAlign: "center",
+    textAlign: 'center',
     letterSpacing: 2,
-    textTransform: "uppercase",
-    color: "#999",
+    textTransform: 'uppercase',
+    color: '#999',
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 12,
-    width: "80%",
+    width: '80%',
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 12,
-    textAlign: "center",
+    textAlign: 'center',
   },
   modalInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderRadius: 8,
     padding: 10,
     marginBottom: 8,
   },
   modalButton: {
     flex: 1,
-    backgroundColor: "#ffcd4a",
+    backgroundColor: '#ffcd4a',
     padding: 12,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     marginHorizontal: 4,
   },
   modalButtonGroup: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 16,
   },
   modalButtonText: {
-    color: "black",
-    fontWeight: "400",
+    color: 'black',
+    fontWeight: '400',
   },
   modalCancelButton: {
     flex: 1,
-    backgroundColor: "#ccc",
+    backgroundColor: '#ccc',
     padding: 12,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     marginLeft: 4,
   },
   modalCancelButtonText: {
-    color: "#000",
-    fontWeight: "400",
+    color: '#000',
+    fontWeight: '400',
   },
 });
