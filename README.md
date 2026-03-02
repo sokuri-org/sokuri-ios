@@ -21,52 +21,53 @@
 <br>
 
 # Table of contents
+
 <br>
 
 <!-- toc -->
 
 - [Motivation](#motivation)
-    + [온라인 쇼핑에서 겪은 불편함을 개선해보자](#%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%87%BC%ED%95%91%EC%97%90%EC%84%9C-%EA%B2%AA%EC%9D%80-%EB%B6%88%ED%8E%B8%ED%95%A8%EC%9D%84-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%B3%B4%EC%9E%90)
-    + [앱 환경에 맞는 사용자 경험을 직접 설계하고 구현하다](#%EC%95%B1-%ED%99%98%EA%B2%BD%EC%97%90-%EB%A7%9E%EB%8A%94-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98%EC%9D%84-%EC%A7%81%EC%A0%91-%EC%84%A4%EA%B3%84%ED%95%98%EA%B3%A0-%EA%B5%AC%ED%98%84%ED%95%98%EB%8B%A4)
+  - [온라인 쇼핑에서 겪은 불편함을 개선해보자](#%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%87%BC%ED%95%91%EC%97%90%EC%84%9C-%EA%B2%AA%EC%9D%80-%EB%B6%88%ED%8E%B8%ED%95%A8%EC%9D%84-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%B3%B4%EC%9E%90)
+  - [앱 환경에 맞는 사용자 경험을 직접 설계하고 구현하다](#%EC%95%B1-%ED%99%98%EA%B2%BD%EC%97%90-%EB%A7%9E%EB%8A%94-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98%EC%9D%84-%EC%A7%81%EC%A0%91-%EC%84%A4%EA%B3%84%ED%95%98%EA%B3%A0-%EA%B5%AC%ED%98%84%ED%95%98%EB%8B%A4)
 - [Preview](#preview)
 - [Tech stack](#tech-stack)
-    + [어플리케이션](#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98)
-    + [서버 및 크롤링](#%EC%84%9C%EB%B2%84-%EB%B0%8F-%ED%81%AC%EB%A1%A4%EB%A7%81)
-    + [머신러닝 및 이미지 분석](#%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EB%B0%8F-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B6%84%EC%84%9D)
+  - [어플리케이션](#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98)
+  - [서버 및 크롤링](#%EC%84%9C%EB%B2%84-%EB%B0%8F-%ED%81%AC%EB%A1%A4%EB%A7%81)
+  - [머신러닝 및 이미지 분석](#%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EB%B0%8F-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B6%84%EC%84%9D)
 - [Development](#development)
-  * [1. 후기 이미지에서 어떻게 실제 사이즈를 추정할 수 있을까?](#1-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%8B%A4%EC%A0%9C-%EC%82%AC%EC%9D%B4%EC%A6%88%EB%A5%BC-%EC%B6%94%EC%A0%95%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C)
-    + [1.1 후기 이미지를 크롤링하고 분석해 실제 사이즈를 추정](#11-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A5%BC-%ED%81%AC%EB%A1%A4%EB%A7%81%ED%95%98%EA%B3%A0-%EB%B6%84%EC%84%9D%ED%95%B4-%EC%8B%A4%EC%A0%9C-%EC%82%AC%EC%9D%B4%EC%A6%88%EB%A5%BC-%EC%B6%94%EC%A0%95)
-    + [1.2 후기 이미지가 없는 경우 사용가 직접 입력하도록 보완](#12-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%EC%97%86%EB%8A%94-%EA%B2%BD%EC%9A%B0-%EC%82%AC%EC%9A%A9%EA%B0%80-%EC%A7%81%EC%A0%91-%EC%9E%85%EB%A0%A5%ED%95%98%EB%8F%84%EB%A1%9D-%EB%B3%B4%EC%99%84)
-    + [1.3 매번 사용자가 아이템을 등록해야 할까?](#13-%EB%A7%A4%EB%B2%88-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-%EC%95%84%EC%9D%B4%ED%85%9C%EC%9D%84-%EB%93%B1%EB%A1%9D%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C)
-  * [2. React Native에서 3D 시뮬레이션 구현이 가능할까?](#2-react-native%EC%97%90%EC%84%9C-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C)
-    + [2.1 문제: React Native는 3D 시뮬레이션에 적합하지 않다](#21-%EB%AC%B8%EC%A0%9C-react-native%EB%8A%94-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%EC%97%90-%EC%A0%81%ED%95%A9%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4)
-    + [2.2 기술 선택 과정: WebView를 선택한 이유](#22-%EA%B8%B0%EC%88%A0-%EC%84%A0%ED%83%9D-%EA%B3%BC%EC%A0%95-webview%EB%A5%BC-%EC%84%A0%ED%83%9D%ED%95%9C-%EC%9D%B4%EC%9C%A0)
+  - [1. 후기 이미지에서 어떻게 실제 사이즈를 추정할 수 있을까?](#1-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%8B%A4%EC%A0%9C-%EC%82%AC%EC%9D%B4%EC%A6%88%EB%A5%BC-%EC%B6%94%EC%A0%95%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C)
+    - [1.1 후기 이미지를 크롤링하고 분석해 실제 사이즈를 추정](#11-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A5%BC-%ED%81%AC%EB%A1%A4%EB%A7%81%ED%95%98%EA%B3%A0-%EB%B6%84%EC%84%9D%ED%95%B4-%EC%8B%A4%EC%A0%9C-%EC%82%AC%EC%9D%B4%EC%A6%88%EB%A5%BC-%EC%B6%94%EC%A0%95)
+    - [1.2 후기 이미지가 없는 경우 사용가 직접 입력하도록 보완](#12-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%EC%97%86%EB%8A%94-%EA%B2%BD%EC%9A%B0-%EC%82%AC%EC%9A%A9%EA%B0%80-%EC%A7%81%EC%A0%91-%EC%9E%85%EB%A0%A5%ED%95%98%EB%8F%84%EB%A1%9D-%EB%B3%B4%EC%99%84)
+    - [1.3 매번 사용자가 아이템을 등록해야 할까?](#13-%EB%A7%A4%EB%B2%88-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-%EC%95%84%EC%9D%B4%ED%85%9C%EC%9D%84-%EB%93%B1%EB%A1%9D%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C)
+  - [2. React Native에서 3D 시뮬레이션 구현이 가능할까?](#2-react-native%EC%97%90%EC%84%9C-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C)
+    - [2.1 문제: React Native는 3D 시뮬레이션에 적합하지 않다](#21-%EB%AC%B8%EC%A0%9C-react-native%EB%8A%94-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%EC%97%90-%EC%A0%81%ED%95%A9%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4)
+    - [2.2 기술 선택 과정: WebView를 선택한 이유](#22-%EA%B8%B0%EC%88%A0-%EC%84%A0%ED%83%9D-%EA%B3%BC%EC%A0%95-webview%EB%A5%BC-%EC%84%A0%ED%83%9D%ED%95%9C-%EC%9D%B4%EC%9C%A0)
       - [방법1. React Native 전용 3D 엔진을 사용](#%EB%B0%A9%EB%B2%951-react-native-%EC%A0%84%EC%9A%A9-3d-%EC%97%94%EC%A7%84%EC%9D%84-%EC%82%AC%EC%9A%A9)
       - [방법2. 네이티브 모듈을 직접 구현](#%EB%B0%A9%EB%B2%952-%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C-%EB%AA%A8%EB%93%88%EC%9D%84-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%98%84)
       - [방법3. React Native 안에 WebView를 연결하기](#%EB%B0%A9%EB%B2%953-react-native-%EC%95%88%EC%97%90-webview%EB%A5%BC-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0)
-    + [2.3 구현: WebView와 React Native 간 양방향 통신 구조](#23-%EA%B5%AC%ED%98%84-webview%EC%99%80-react-native-%EA%B0%84-%EC%96%91%EB%B0%A9%ED%96%A5-%ED%86%B5%EC%8B%A0-%EA%B5%AC%EC%A1%B0)
-    + [2.4 결과: RN 앱에서도 실시간 3D 시뮬레이션이 가능해졌다](#24-%EA%B2%B0%EA%B3%BC-rn-%EC%95%B1%EC%97%90%EC%84%9C%EB%8F%84-%EC%8B%A4%EC%8B%9C%EA%B0%84-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%A1%8C%EB%8B%A4)
-  * [3. 서버 구조 설계 및 예외 대응](#3-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84-%EB%B0%8F-%EC%98%88%EC%99%B8-%EB%8C%80%EC%9D%91)
-    + [3.1 FastAPI 기반의 REST API 서버 구조](#31-fastapi-%EA%B8%B0%EB%B0%98%EC%9D%98-rest-api-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0)
-    + [3.2 입력 검증 및 예외 상황 대응](#32-%EC%9E%85%EB%A0%A5-%EA%B2%80%EC%A6%9D-%EB%B0%8F-%EC%98%88%EC%99%B8-%EC%83%81%ED%99%A9-%EB%8C%80%EC%9D%91)
-    + [3.3 서버 구조의 유지보수성과 확장성 고려](#33-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0%EC%9D%98-%EC%9C%A0%EC%A7%80%EB%B3%B4%EC%88%98%EC%84%B1%EA%B3%BC-%ED%99%95%EC%9E%A5%EC%84%B1-%EA%B3%A0%EB%A0%A4)
-  * [4. 앱 사용 흐름 구축](#4-%EC%95%B1-%EC%82%AC%EC%9A%A9-%ED%9D%90%EB%A6%84-%EA%B5%AC%EC%B6%95)
-    + [1단계. 사용자가 쇼핑몰 URL 입력](#1%EB%8B%A8%EA%B3%84-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-%EC%87%BC%ED%95%91%EB%AA%B0-url-%EC%9E%85%EB%A0%A5)
-    + [2단계. 서버에서 후기 이미지 크롤링](#2%EB%8B%A8%EA%B3%84-%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80-%ED%81%AC%EB%A1%A4%EB%A7%81)
-    + [3단계. YOLOv8 모델 기반 이미지 분석](#3%EB%8B%A8%EA%B3%84-yolov8-%EB%AA%A8%EB%8D%B8-%EA%B8%B0%EB%B0%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B6%84%EC%84%9D)
-    + [4단계. 사이즈 추정 결과 반환](#4%EB%8B%A8%EA%B3%84-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%B6%94%EC%A0%95-%EA%B2%B0%EA%B3%BC-%EB%B0%98%ED%99%98)
-    + [5단계. WebView 기반 3D 시뮬레이터 실행](#5%EB%8B%A8%EA%B3%84-webview-%EA%B8%B0%EB%B0%98-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0-%EC%8B%A4%ED%96%89)
-    + [6단계. 시뮬레이션 결과 저장 및 반복 사용](#6%EB%8B%A8%EA%B3%84-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98-%EA%B2%B0%EA%B3%BC-%EC%A0%80%EC%9E%A5-%EB%B0%8F-%EB%B0%98%EB%B3%B5-%EC%82%AC%EC%9A%A9)
+    - [2.3 구현: WebView와 React Native 간 양방향 통신 구조](#23-%EA%B5%AC%ED%98%84-webview%EC%99%80-react-native-%EA%B0%84-%EC%96%91%EB%B0%A9%ED%96%A5-%ED%86%B5%EC%8B%A0-%EA%B5%AC%EC%A1%B0)
+    - [2.4 결과: RN 앱에서도 실시간 3D 시뮬레이션이 가능해졌다](#24-%EA%B2%B0%EA%B3%BC-rn-%EC%95%B1%EC%97%90%EC%84%9C%EB%8F%84-%EC%8B%A4%EC%8B%9C%EA%B0%84-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%A1%8C%EB%8B%A4)
+  - [3. 서버 구조 설계 및 예외 대응](#3-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84-%EB%B0%8F-%EC%98%88%EC%99%B8-%EB%8C%80%EC%9D%91)
+    - [3.1 FastAPI 기반의 REST API 서버 구조](#31-fastapi-%EA%B8%B0%EB%B0%98%EC%9D%98-rest-api-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0)
+    - [3.2 입력 검증 및 예외 상황 대응](#32-%EC%9E%85%EB%A0%A5-%EA%B2%80%EC%A6%9D-%EB%B0%8F-%EC%98%88%EC%99%B8-%EC%83%81%ED%99%A9-%EB%8C%80%EC%9D%91)
+    - [3.3 서버 구조의 유지보수성과 확장성 고려](#33-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0%EC%9D%98-%EC%9C%A0%EC%A7%80%EB%B3%B4%EC%88%98%EC%84%B1%EA%B3%BC-%ED%99%95%EC%9E%A5%EC%84%B1-%EA%B3%A0%EB%A0%A4)
+  - [4. 앱 사용 흐름 구축](#4-%EC%95%B1-%EC%82%AC%EC%9A%A9-%ED%9D%90%EB%A6%84-%EA%B5%AC%EC%B6%95)
+    - [1단계. 사용자가 쇼핑몰 URL 입력](#1%EB%8B%A8%EA%B3%84-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-%EC%87%BC%ED%95%91%EB%AA%B0-url-%EC%9E%85%EB%A0%A5)
+    - [2단계. 서버에서 후기 이미지 크롤링](#2%EB%8B%A8%EA%B3%84-%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EB%AF%B8%EC%A7%80-%ED%81%AC%EB%A1%A4%EB%A7%81)
+    - [3단계. YOLOv8 모델 기반 이미지 분석](#3%EB%8B%A8%EA%B3%84-yolov8-%EB%AA%A8%EB%8D%B8-%EA%B8%B0%EB%B0%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B6%84%EC%84%9D)
+    - [4단계. 사이즈 추정 결과 반환](#4%EB%8B%A8%EA%B3%84-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%B6%94%EC%A0%95-%EA%B2%B0%EA%B3%BC-%EB%B0%98%ED%99%98)
+    - [5단계. WebView 기반 3D 시뮬레이터 실행](#5%EB%8B%A8%EA%B3%84-webview-%EA%B8%B0%EB%B0%98-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0-%EC%8B%A4%ED%96%89)
+    - [6단계. 시뮬레이션 결과 저장 및 반복 사용](#6%EB%8B%A8%EA%B3%84-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98-%EA%B2%B0%EA%B3%BC-%EC%A0%80%EC%9E%A5-%EB%B0%8F-%EB%B0%98%EB%B3%B5-%EC%82%AC%EC%9A%A9)
 - [Trouble Shooting](#trouble-shooting)
-  * [1. WebView 내 3D 시뮬레이터가 화면 밖에 렌더링되는 문제](#1-webview-%EB%82%B4-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0%EA%B0%80-%ED%99%94%EB%A9%B4-%EB%B0%96%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%EB%90%98%EB%8A%94-%EB%AC%B8%EC%A0%9C)
-  * [2. WebView가 메세지에 응답하지 않는 문제](#2-webview%EA%B0%80-%EB%A9%94%EC%84%B8%EC%A7%80%EC%97%90-%EC%9D%91%EB%8B%B5%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C)
+  - [1. WebView 내 3D 시뮬레이터가 화면 밖에 렌더링되는 문제](#1-webview-%EB%82%B4-3d-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0%EA%B0%80-%ED%99%94%EB%A9%B4-%EB%B0%96%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%EB%90%98%EB%8A%94-%EB%AC%B8%EC%A0%9C)
+  - [2. WebView가 메세지에 응답하지 않는 문제](#2-webview%EA%B0%80-%EB%A9%94%EC%84%B8%EC%A7%80%EC%97%90-%EC%9D%91%EB%8B%B5%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C)
 - [User Experience](#user-experience)
-  * [어떤 기준으로 사용자 흐름을 설계할까?](#%EC%96%B4%EB%96%A4-%EA%B8%B0%EC%A4%80%EC%9C%BC%EB%A1%9C-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%9D%90%EB%A6%84%EC%9D%84-%EC%84%A4%EA%B3%84%ED%95%A0%EA%B9%8C)
-  * [1. 메인 화면에서 바로 검색 가능하도록 구현](#1-%EB%A9%94%EC%9D%B8-%ED%99%94%EB%A9%B4%EC%97%90%EC%84%9C-%EB%B0%94%EB%A1%9C-%EA%B2%80%EC%83%89-%EA%B0%80%EB%8A%A5%ED%95%98%EB%8F%84%EB%A1%9D-%EA%B5%AC%ED%98%84)
-  * [2. 정보를 카드 UI로 요약해 한눈에 파악가능](#2-%EC%A0%95%EB%B3%B4%EB%A5%BC-%EC%B9%B4%EB%93%9C-ui%EB%A1%9C-%EC%9A%94%EC%95%BD%ED%95%B4-%ED%95%9C%EB%88%88%EC%97%90-%ED%8C%8C%EC%95%85%EA%B0%80%EB%8A%A5)
-  * [3. 제스쳐 기반으로 아이템 변경 및 삭제](#3-%EC%A0%9C%EC%8A%A4%EC%B3%90-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-%EC%95%84%EC%9D%B4%ED%85%9C-%EB%B3%80%EA%B2%BD-%EB%B0%8F-%EC%82%AD%EC%A0%9C)
-  * [4. 사이즈 수정 후에도 시뮬레이터와 항상 동기화되도록 적용](#4-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%88%98%EC%A0%95-%ED%9B%84%EC%97%90%EB%8F%84-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0%EC%99%80-%ED%95%AD%EC%83%81-%EB%8F%99%EA%B8%B0%ED%99%94%EB%90%98%EB%8F%84%EB%A1%9D-%EC%A0%81%EC%9A%A9)
-  * [5. 애니메이션으로 부드러운 화면 전환](#5-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%EC%9C%BC%EB%A1%9C-%EB%B6%80%EB%93%9C%EB%9F%AC%EC%9A%B4-%ED%99%94%EB%A9%B4-%EC%A0%84%ED%99%98)
+  - [어떤 기준으로 사용자 흐름을 설계할까?](#%EC%96%B4%EB%96%A4-%EA%B8%B0%EC%A4%80%EC%9C%BC%EB%A1%9C-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%9D%90%EB%A6%84%EC%9D%84-%EC%84%A4%EA%B3%84%ED%95%A0%EA%B9%8C)
+  - [1. 메인 화면에서 바로 검색 가능하도록 구현](#1-%EB%A9%94%EC%9D%B8-%ED%99%94%EB%A9%B4%EC%97%90%EC%84%9C-%EB%B0%94%EB%A1%9C-%EA%B2%80%EC%83%89-%EA%B0%80%EB%8A%A5%ED%95%98%EB%8F%84%EB%A1%9D-%EA%B5%AC%ED%98%84)
+  - [2. 정보를 카드 UI로 요약해 한눈에 파악가능](#2-%EC%A0%95%EB%B3%B4%EB%A5%BC-%EC%B9%B4%EB%93%9C-ui%EB%A1%9C-%EC%9A%94%EC%95%BD%ED%95%B4-%ED%95%9C%EB%88%88%EC%97%90-%ED%8C%8C%EC%95%85%EA%B0%80%EB%8A%A5)
+  - [3. 제스쳐 기반으로 아이템 변경 및 삭제](#3-%EC%A0%9C%EC%8A%A4%EC%B3%90-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-%EC%95%84%EC%9D%B4%ED%85%9C-%EB%B3%80%EA%B2%BD-%EB%B0%8F-%EC%82%AD%EC%A0%9C)
+  - [4. 사이즈 수정 후에도 시뮬레이터와 항상 동기화되도록 적용](#4-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%88%98%EC%A0%95-%ED%9B%84%EC%97%90%EB%8F%84-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0%EC%99%80-%ED%95%AD%EC%83%81-%EB%8F%99%EA%B8%B0%ED%99%94%EB%90%98%EB%8F%84%EB%A1%9D-%EC%A0%81%EC%9A%A9)
+  - [5. 애니메이션으로 부드러운 화면 전환](#5-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%EC%9C%BC%EB%A1%9C-%EB%B6%80%EB%93%9C%EB%9F%AC%EC%9A%B4-%ED%99%94%EB%A9%B4-%EC%A0%84%ED%99%98)
 - [Retrospective](#retrospective)
 
 <!-- tocstop -->
@@ -221,7 +222,7 @@ webViewRef.current.postMessage(
   JSON.stringify({
     type: "RENDER_PACKING",
     payload: { items, bag },
-  })
+  }),
 );
 
 // WebView → React Native로 이벤트 전달
@@ -229,7 +230,7 @@ window.ReactNativeWebView.postMessage(
   JSON.stringify({
     type: "ITEM_SELECTED",
     payload: itemId,
-  })
+  }),
 );
 ```
 
@@ -245,6 +246,7 @@ WebView를 활용한 구조 덕분에, React Native 앱 환경에서도 실시�
 가방의 사이즈 기준으로 시뮬레이션 화면을 보여주기 위해서, 신뢰할 수 있는 가방 사이즈 데이터가 필요합니다. YOLOv8 모델을 통해 이미지에서 물체를 탐지하는 것이 중심이었지만, 실제 서비스에서는 다양한 예외 상황을 고려해야만 안정적인 흐름이 완성됩니다. 이를 위해 FastAPI 기반의 백엔드 서버를 구조화된 모듈로 설계하고, 입력 검증 및 예외 대응 구조를 구현했습니다.
 
 ### 3.1 FastAPI 기반의 REST API 서버 구조
+
 Python의 FastAPI 프레임워크를 사용해 RESTful한 API 서버를 구성했습니다. 주요 엔드포인트는 다음과 같은 역할을 합니다:
 
 `/crawlImages`: URL을 기반으로 쇼핑몰 후기를 크롤링하고 이미지 리스트를 반환
@@ -268,6 +270,7 @@ Python의 FastAPI 프레임워크를 사용해 RESTful한 API 서버를 구성�
 이러한 예외 상황에서 에러 메시지로 끝나지 않고, 앱에서 사용자에게 안내 문구로 자연스럽게 연결되도록 처리됩니다. 예를 들어, 기준 객체가 없을 경우엔 사이즈를 직접 입력하는 대체 입력 폼으로 흐름을 전환하도록 설계했습니다.
 
 ### 3.3 서버 구조의 유지보수성과 확장성 고려
+
 백엔드 코드는 다음과 같은 기준으로 모듈화되어 구성되었습니다:
 
 `schemas/`: Pydantic 기반 요청 및 응답 스키마 정의
@@ -282,12 +285,12 @@ Python의 FastAPI 프레임워크를 사용해 RESTful한 API 서버를 구성�
 
 이 구조 덕분에 각 기능의 책임이 명확히 분리되어 있으며, 크롤링 대상 쇼핑몰을 추가하거나 새로운 YOLO 모델을 교체할 때도 최소한의 수정만으로 확장할 수 있습니다.
 
-
 ## 4. 앱 사용 흐름 구축
 
 사용자가 쇼핑몰 URL만 입력하면, 그 뒤로는 자동으로 크롤링 → 이미지 분석 → 사이즈 추정 → 3D 시뮬레이션까지 이어지는 전체 흐름을 처리합니다.
 
 ### 1단계. 사용자가 쇼핑몰 URL 입력
+
 앱의 메인 화면에서 사용자는 구매를 고려 중인 가방 상품의 URL을 입력합니다. 현재는 무신사와 지그재그를 지원하고 있으며, 입력된 URL은 서버로 전달됩니다.
 
 ```js
@@ -296,6 +299,7 @@ https://store.musinsa.com/app/goods/123456
 ```
 
 ### 2단계. 서버에서 후기 이미지 크롤링
+
 서버는 URL에서 상품 ID를 추출한 뒤, 해당 쇼핑몰의 후기 이미지 페이지를 크롤링합니다.
 쇼핑몰마다 HTML 구조와 로딩 방식이 달라, 사이트별 맞춤 크롤링 로직을 사용합니다.
 
@@ -303,6 +307,7 @@ https://store.musinsa.com/app/goods/123456
 - 예외 처리: 이미지가 없는 경우, 사용자에게 직접 입력을 유도합니다.
 
 ### 3단계. YOLOv8 모델 기반 이미지 분석
+
 수집한 이미지들을 Python 서버로 전달하고, YOLOv8 모델을 사용해 가방과 비교 기준이 되는 객체를 동시에 탐지합니다.
 
 - 비교 기준이 되는 객체가 있을 경우 → 상대 크기를 계산해 실제 사이즈 추정
@@ -310,6 +315,7 @@ https://store.musinsa.com/app/goods/123456
 - 이미지가 없거나 가방이 미검출된 경우 → fallback으로 사용자 입력을 유도
 
 ### 4단계. 사이즈 추정 결과 반환
+
 이미지 분석 결과는 다음과 같은 JSON 형태로 반환됩니다:
 
 ```json
@@ -325,6 +331,7 @@ https://store.musinsa.com/app/goods/123456
 이 결과는 클라이언트로 전달되어 앱 내 상태에 저장되고, 즉시 시뮬레이터에 반영됩니다.
 
 ### 5단계. WebView 기반 3D 시뮬레이터 실행
+
 React Native 앱 내 WebView에 Three.js로 구현된 3D 시뮬레이터가 탑재되어 있습니다.
 
 - React Native → WebView: 가방 사이즈와 아이템 목록 전달
@@ -377,7 +384,7 @@ React Native와 WebView 간의 데이터 전달은 WebView가 기본적으로 �
 // React Native에서 메시지 전송을 지연
 setTimeout(() => {
   webViewRef.current.postMessage(
-    JSON.stringify({ type: "RENDER_PACKING", payload: { items, bag } })
+    JSON.stringify({ type: "RENDER_PACKING", payload: { items, bag } }),
   );
 }, 300);
 ```
@@ -389,7 +396,9 @@ setTimeout(() => {
 ```js
 // WebView 내부 초기화 코드
 window.onload = () => {
-  window.ReactNativeWebView.postMessage(JSON.stringify({ type: "WEBVIEW_READY" }));
+  window.ReactNativeWebView.postMessage(
+    JSON.stringify({ type: "WEBVIEW_READY" }),
+  );
 };
 ```
 
@@ -404,7 +413,7 @@ onMessage = (event) => {
       JSON.stringify({
         type: "RENDER_PACKING",
         payload: { items, bag },
-      })
+      }),
     );
   }
 };
