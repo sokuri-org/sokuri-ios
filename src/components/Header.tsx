@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function Header() {
   return (
@@ -14,20 +14,20 @@ const styles = StyleSheet.create({
     paddingTop: 64,
     paddingBottom: 64,
     paddingHorizontal: 20,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
   },
   title: {
     fontSize: 32,
-    fontFamily: "serif",
+    fontFamily: 'serif',
     letterSpacing: -0.5,
-    color: "#111",
+    color: '#111',
   },
   subtitle: {
     marginTop: 12,
     fontSize: 12,
     letterSpacing: 2,
-    textTransform: "uppercase",
-    color: "#999",
+    textTransform: 'uppercase',
+    color: '#999',
   },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, RefObject } from 'react';
 import {
   Modal,
   View,
@@ -7,12 +7,24 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-} from "react-native";
-import { useSokuriStore } from "@/store/useSokuriStore";
+} from 'react-native';
+import { WebView } from 'react-native-webview';
+import { useSokuriStore } from '@/store/useSokuriStore';
+import { EditDims } from '@/types';
 
-export default function EditItemModal({ visible, onClose, webViewRef }) {
+interface EditItemModalProps {
+  visible: boolean;
+  onClose: () => void;
+  webViewRef: RefObject<WebView | null>;
+}
+
+export default function EditItemModal({
+  visible,
+  onClose,
+  webViewRef,
+}: EditItemModalProps) {
   const editDims = useSokuriStore(
-    (s) => s.editItemDims ?? { w: "", h: "", d: "" },
+    (s) => s.editItemDims ?? { w: '', h: '', d: '' },
   );
   const setEditDims = useSokuriStore((s) => s.setEditItemDims);
   const selectedItem = useSokuriStore((s) => s.selectedItem);
@@ -20,16 +32,16 @@ export default function EditItemModal({ visible, onClose, webViewRef }) {
     (s) => s.setShouldAddBagToWebView,
   );
 
-  const handleChange = (field, value) => {
+  const handleChange = (field: keyof EditDims, value: string) => {
     setEditDims({ ...editDims, [field]: value });
   };
 
   useEffect(() => {
     if (visible && selectedItem) {
       setEditDims({
-        w: String(selectedItem.width ?? ""),
-        h: String(selectedItem.height ?? ""),
-        d: String(selectedItem.depth ?? ""),
+        w: String(selectedItem.width ?? ''),
+        h: String(selectedItem.height ?? ''),
+        d: String(selectedItem.depth ?? ''),
       });
     }
   }, [visible, selectedItem]);
@@ -39,12 +51,14 @@ export default function EditItemModal({ visible, onClose, webViewRef }) {
     const height = parseFloat(editDims.h);
     const depth = parseFloat(editDims.d);
     if (isNaN(width) || isNaN(height) || isNaN(depth)) {
-      Alert.alert("입력 오류", "유효한 숫자를 입력해주세요.");
+      Alert.alert('입력 오류', '유효한 숫자를 입력해주세요.');
       return;
     }
-    console.log("🔧 변경 시도", { width, height, depth });
-    console.log("selectedItem: ", selectedItem);
-    console.log("webViewRef: ", webViewRef);
+    console.log('🔧 변경 시도', { width, height, depth });
+    console.log('selectedItem: ', selectedItem);
+    console.log('webViewRef: ', webViewRef);
+
+    if (!selectedItem) return;
 
     useSokuriStore
       .getState()
@@ -64,21 +78,21 @@ export default function EditItemModal({ visible, onClose, webViewRef }) {
           <Text style={styles.modalTitle}>사이즈 수정</Text>
           <TextInput
             value={editDims.w}
-            onChangeText={(v) => handleChange("w", v)}
+            onChangeText={(v) => handleChange('w', v)}
             placeholder="Width"
             style={styles.input}
             keyboardType="numeric"
           />
           <TextInput
             value={editDims.h}
-            onChangeText={(v) => handleChange("h", v)}
+            onChangeText={(v) => handleChange('h', v)}
             placeholder="Height"
             style={styles.input}
             keyboardType="numeric"
           />
           <TextInput
             value={editDims.d}
-            onChangeText={(v) => handleChange("d", v)}
+            onChangeText={(v) => handleChange('d', v)}
             placeholder="Depth"
             style={styles.input}
             keyboardType="numeric"
@@ -100,38 +114,38 @@ export default function EditItemModal({ visible, onClose, webViewRef }) {
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.3)",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContent: {
-    width: "90%",
-    backgroundColor: "#fff",
+    width: '90%',
+    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 12,
   },
   modalTitle: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 12,
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderRadius: 6,
     padding: 10,
     marginBottom: 10,
   },
   modalBtnRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 10,
   },
   modalBtn: {
-    backgroundColor: "#eee",
+    backgroundColor: '#eee',
     padding: 10,
     borderRadius: 6,
-    width: "45%",
-    alignItems: "center",
+    width: '45%',
+    alignItems: 'center',
   },
 });
