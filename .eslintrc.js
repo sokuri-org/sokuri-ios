@@ -8,7 +8,7 @@ module.exports = {
   rules: {
     "prettier/prettier": "error",
     "no-console": "off",
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "import/extensions": "off",
     "import/order": [
       "error",
@@ -35,7 +35,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       node: {
-        extensions: [".js", ".jsx"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
     },
   },
